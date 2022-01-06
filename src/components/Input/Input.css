@@ -1,0 +1,32 @@
+.input-block {
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #080808;
+  padding: 10px 15px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.input.error {
+  border: 1px solid #ff4e4e;
+}
+
+.input.error::placeholder {
+  color: #ff4e4e;
+}
+
+.input:focus {
+  outline: none;
+  transform: scale(1.01);
+}
+
+.input-error {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff4e4e;
+  margin-top: 2px;
+}

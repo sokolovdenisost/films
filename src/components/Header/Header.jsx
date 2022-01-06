@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../Button/Button";
-import { Modal } from "../Modal/Modal";
+import { ModalAdd } from "../Modal/ModalAdd/ModalAdd";
 import "./Header.css";
 
 export const Header = () => {
@@ -22,9 +22,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <Modal title="Добавление фильма" active={active} setActive={setActive}>
-        <div className="test">test</div>
-      </Modal>
+      <ModalAdd title="Добавление фильма" active={active} setActive={setActive}></ModalAdd>
     </div>
   );
 };

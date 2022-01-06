@@ -1,0 +1,10 @@
+.modal-add {
+  width: 400px;
+}
+
+.modal-add__buttons {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

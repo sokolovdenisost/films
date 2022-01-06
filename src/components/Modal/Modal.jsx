@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Modal.css";
 
-export const Modal = ({ active, setActive, title, children }) => {
-  function closeModalHandler() {
-    setActive(false);
+export const Modal = ({ active, setActive, title, children, onClose }) => {
+  function clickHandler() {
+    if (onClose) return onClose();
   }
 
   function resetEvent(e) {
@@ -12,7 +12,7 @@ export const Modal = ({ active, setActive, title, children }) => {
   }
 
   return (
-    <div className={`modal ${active && "active"}`} onClick={closeModalHandler}>
+    <div className={`modal ${active && "active"}`} onClick={clickHandler}>
       <div className="modal-block" onClick={resetEvent}>
         <div className="modal-block__title">{title}</div>
         <div className="modal-block__body">{children}</div>
@@ -26,4 +26,5 @@ Modal.propTypes = {
   setActive: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
