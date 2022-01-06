@@ -1,4 +1,4 @@
-import { JSON_API } from "../../const";
+import { JSON_API } from "../../consts";
 import { ADD_FILM, GET_FILMS } from "../types";
 
 export const getFilms = () => async (dispatch) => {

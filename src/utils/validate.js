@@ -39,6 +39,7 @@ const fields = {
   budget: "Бюджет",
   img: "URL Изображения",
   trailer: "URL Трейлера",
+  description: "Описание",
 };
 
-const currencies = ["дол", "руб", "евро"];
+const currencies = ["$", "дол", "руб", "евро"];
