@@ -45,11 +45,16 @@ export const ModalAdd = ({ active, setActive, title }) => {
   }
 
   function addFilmHandler() {
-    Object.keys(form).forEach((key) => setErrors((state) => ({ ...state, [key]: validateField(key, form[key]) })));
+    const promis = new Promise((resolve, reject) => {
+      Object.keys(form).forEach((key) => setErrors((state) => ({ ...state, [key]: validateField(key, form[key]) })));
+      setTimeout(() => {
+        resolve(Object.keys(errors).filter((key) => errors[key]).length);
+      }, 300);
+    });
 
-    // console.log(Object.keys(errors).filter((key) => errors[key]).length);
-    dispatch(addFilm(form));
-    closeModalHandler();
+    promis.then((value) => console.log(value));
+    // dispatch(addFilm(form));
+    // closeModalHandler();
   }
 
   return (

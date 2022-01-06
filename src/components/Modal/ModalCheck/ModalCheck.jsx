@@ -8,10 +8,12 @@ export const ModalCheck = ({ active, setActive, title, film }) => {
     setActive(false);
   }
 
+  const { height } = window.screen;
+
   return (
     <Modal active={active} setActive={setActive} title={title} onClose={closeModalHandler}>
       <div className="modal-check">
-        <ul className="modal-check__list">
+        <ul className="modal-check__list" style={{ height: height < 1000 ? height - 150 : null }}>
           <li className="modal-check__item">
             <div className="modal-item__title">Год</div>
             <div className="modal-item__description">{film.year}</div>

@@ -2,6 +2,11 @@
   width: 500px;
 }
 
+.modal-check__list {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .modal-check__item {
   margin: 10px 0;
   padding-bottom: 5px;
@@ -21,4 +26,10 @@
 
 .modal-item__description {
   font-size: 14px;
+}
+
+@media (max-width: 550px) {
+  .modal-check {
+    width: 260px;
+  }
 }
