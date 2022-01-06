@@ -1,0 +1,38 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform: scale(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-block {
+  width: 500px;
+  height: 500px;
+  border-radius: 5px;
+  background-color: #ffff;
+  padding: 20px;
+}
+
+.modal-block__title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-block__body {
+  margin-top: 25px;
+}
