@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "../Modal";
 import PropTypes from "prop-types";
 import "./ModalAdd.css";
@@ -7,6 +7,8 @@ import { Button } from "../../Button/Button";
 import { validateField } from "../../../utils/validate";
 import { useDispatch } from "react-redux";
 import { addFilm } from "../../../store/actions/filmsAction";
+import { useSelector } from "react-redux";
+import { resetError, setError } from "../../../store/actions/errorsAction";
 
 export const ModalAdd = ({ active, setActive, title }) => {
   const dispatch = useDispatch();
@@ -21,18 +23,7 @@ export const ModalAdd = ({ active, setActive, title }) => {
     trailer: "",
     description: "",
   });
-
-  const [errors, setErrors] = useState({
-    name: null,
-    year: null,
-    country: null,
-    genre: null,
-    director: null,
-    budget: null,
-    img: null,
-    trailer: null,
-    description: null,
-  });
+  const { modalErrors } = useSelector((state) => state.errors);
 
   function closeModalHandler() {
     setActive(false);
@@ -41,35 +32,40 @@ export const ModalAdd = ({ active, setActive, title }) => {
   function changeInputHandler(e) {
     const { id, value } = e.target;
     setForm({ ...form, [id]: value });
-    setErrors({ ...errors, [id]: null });
+
+    if (modalErrors[id]) dispatch(resetError(id));
   }
 
-  function addFilmHandler() {
-    const promis = new Promise((resolve, reject) => {
-      Object.keys(form).forEach((key) => setErrors((state) => ({ ...state, [key]: validateField(key, form[key]) })));
-      setTimeout(() => {
-        resolve(Object.keys(errors).filter((key) => errors[key]).length);
-      }, 300);
+  function validateForm() {
+    let error = false;
+    Object.keys(form).forEach((key) => {
+      if (validateField(key, form[key]) !== null) error = true;
+      dispatch(setError(key, validateField(key, form[key])));
     });
 
-    promis.then((value) => console.log(value));
-    // dispatch(addFilm(form));
-    // closeModalHandler();
+    return error;
+  }
+
+  async function addFilmHandler() {
+    if (!validateForm()) {
+      dispatch(addFilm(form));
+      closeModalHandler();
+    }
   }
 
   return (
     <Modal active={active} setActive={setActive} title={title} onClose={closeModalHandler}>
       <div className="modal-add">
         <div className="modal-add__form">
-          <Input placeholder="Название" id="name" error={errors.name} onChange={changeInputHandler}></Input>
-          <Input placeholder="Год" id="year" error={errors.year} onChange={changeInputHandler}></Input>
-          <Input placeholder="Страна" id="country" error={errors.country} onChange={changeInputHandler}></Input>
-          <Input placeholder="Жанр" id="genre" error={errors.genre} onChange={changeInputHandler}></Input>
-          <Input placeholder="Режиссер" id="director" error={errors.director} onChange={changeInputHandler}></Input>
-          <Input placeholder="Бюджет ($, дол, руб, евро)" id="budget" error={errors.budget} onChange={changeInputHandler}></Input>
-          <Input placeholder="URL Изображения" id="img" error={errors.img} onChange={changeInputHandler}></Input>
-          <Input placeholder="URL Трейлера (youtube)" id="trailer" error={errors.trailer} onChange={changeInputHandler}></Input>
-          <Input placeholder="Описание" id="description" error={errors.description} onChange={changeInputHandler}></Input>
+          <Input placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
+          <Input placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
+          <Input placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
+          <Input placeholder="Жанр" id="genre" error={modalErrors.genre} onChange={changeInputHandler}></Input>
+          <Input placeholder="Режиссер" id="director" error={modalErrors.director} onChange={changeInputHandler}></Input>
+          <Input placeholder="Бюджет ($, дол, руб, евро)" id="budget" error={modalErrors.budget} onChange={changeInputHandler}></Input>
+          <Input placeholder="URL Изображения" id="img" error={modalErrors.img} onChange={changeInputHandler}></Input>
+          <Input placeholder="URL Трейлера (youtube)" id="trailer" error={modalErrors.trailer} onChange={changeInputHandler}></Input>
+          <Input placeholder="Описание" id="description" error={modalErrors.description} onChange={changeInputHandler}></Input>
         </div>
         <div className="modal-add__buttons">
           <Button title="Отмена" color="white" onClick={closeModalHandler}></Button>
