@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "../Modal";
 import PropTypes from "prop-types";
 import "./ModalCheck.css";
+import { Button } from "../../Button/Button";
 
 export const ModalCheck = ({ active, setActive, title, film }) => {
   function closeModalHandler() {
@@ -13,7 +14,10 @@ export const ModalCheck = ({ active, setActive, title, film }) => {
   return (
     <Modal active={active} setActive={setActive} title={title} onClose={closeModalHandler}>
       <div className="modal-check">
-        <ul className="modal-check__list" style={{ height: height < 1000 ? height - 150 : null }}>
+        <ul className="modal-check__list" style={{ maxHeight: height < 1000 ? height - 200 : 650 }}>
+          <li className="modal-check__item">
+            <img src={film.img} alt={film.name} className="modal-check__img" />
+          </li>
           <li className="modal-check__item">
             <div className="modal-item__title">Год</div>
             <div className="modal-item__description">{film.year}</div>
@@ -43,6 +47,9 @@ export const ModalCheck = ({ active, setActive, title, film }) => {
             <div className="modal-item__description">{film.description}</div>
           </li>
         </ul>
+        <div className="modal-check__buttons">
+          <Button title="Закрыть" color="white" onClick={closeModalHandler}></Button>
+        </div>
       </div>
     </Modal>
   );

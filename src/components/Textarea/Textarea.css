@@ -1,9 +1,16 @@
-.input-block {
+.textarea-block {
   margin-bottom: 10px;
 }
 
-.input {
-  width: 100%;
+.textarea-block:last-child {
+  margin-bottom: 0;
+}
+
+.textarea {
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 200px;
+  min-height: 100px;
   border-radius: 5px;
   border: 1px solid #080808;
   padding: 10px 15px;
@@ -11,20 +18,20 @@
   transition: all 0.3s ease;
 }
 
-.input.error {
+.textarea.error {
   border: 1px solid #ff4e4e;
 }
 
-.input.error::placeholder {
+.textarea.error::placeholder {
   color: #ff4e4e;
 }
 
-.input:focus {
+.textarea:focus {
   outline: none;
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.input-error {
+.textarea-error {
   font-size: 14px;
   font-weight: 500;
   color: #ff4e4e;

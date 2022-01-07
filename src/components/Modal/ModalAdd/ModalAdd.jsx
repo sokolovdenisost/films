@@ -9,8 +9,9 @@ import { useDispatch } from "react-redux";
 import { addFilm } from "../../../store/actions/filmsAction";
 import { useSelector } from "react-redux";
 import { resetError, setError } from "../../../store/actions/errorsAction";
+import { Textarea } from "../../Textarea/Textarea";
 
-export const ModalAdd = ({ active, setActive, title }) => {
+export const ModalAdd = ({ active, onClose, title }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
@@ -26,17 +27,19 @@ export const ModalAdd = ({ active, setActive, title }) => {
   const { modalErrors } = useSelector((state) => state.errors);
 
   function closeModalHandler() {
-    setActive(false);
-    resetForm();
+    if (onClose) onClose();
+    resetFormErrors();
   }
 
-  function resetForm() {
+  function resetFormErrors() {
     Object.keys(form).forEach((key) => setForm((state) => ({ ...state, [key]: "" })));
+    Object.keys(modalErrors).forEach((key) => dispatch(resetError(key)));
   }
 
   function changeInputHandler(e) {
     const { id, value } = e.target;
     setForm({ ...form, [id]: value });
+    console.log("test");
 
     if (modalErrors[id]) dispatch(resetError(id));
   }
@@ -58,10 +61,12 @@ export const ModalAdd = ({ active, setActive, title }) => {
     }
   }
 
+  const { height } = window.screen;
+
   return (
-    <Modal active={active} setActive={setActive} title={title} onClose={closeModalHandler}>
+    <Modal active={active} title={title} onClose={closeModalHandler}>
       <div className="modal-add">
-        <div className="modal-add__form">
+        <div className="modal-add__form" style={{ maxHeight: height < 1000 ? height - 200 : null }}>
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
           <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
           <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
@@ -88,13 +93,13 @@ export const ModalAdd = ({ active, setActive, title }) => {
             error={modalErrors.trailer}
             onChange={changeInputHandler}
           ></Input>
-          <Input
+          <Textarea
             value={form.description}
             placeholder="Описание"
             id="description"
             error={modalErrors.description}
             onChange={changeInputHandler}
-          ></Input>
+          ></Textarea>
         </div>
         <div className="modal-add__buttons">
           <Button title="Отмена" color="white" onClick={closeModalHandler}></Button>
@@ -107,6 +112,6 @@ export const ModalAdd = ({ active, setActive, title }) => {
 
 ModalAdd.propTypes = {
   active: PropTypes.bool.isRequired,
-  setActive: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };

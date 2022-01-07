@@ -2,6 +2,10 @@
   width: 400px;
 }
 
+.modal-add__form {
+  overflow-y: auto;
+}
+
 .modal-add__buttons {
   margin-top: 20px;
   display: flex;

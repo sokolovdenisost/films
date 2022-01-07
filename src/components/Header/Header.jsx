@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { toggleModal } from "../../store/actions/filmsAction";
 import { Button } from "../Button/Button";
 import { ModalAdd } from "../Modal/ModalAdd/ModalAdd";
 import "./Header.css";
 
 export const Header = () => {
-  const [active, setActive] = useState(false);
+  const { modal } = useSelector((state) => state.films);
+  const dispatch = useDispatch();
 
   function openModalAddHandler() {
-    setActive(true);
+    dispatch(toggleModal());
+  }
+
+  function closeModalAddHandler() {
+    dispatch(toggleModal());
   }
 
   return (
@@ -22,7 +30,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <ModalAdd title="Добавление фильма" active={active} setActive={setActive}></ModalAdd>
+      <ModalAdd title="Добавление фильма" active={modal} onClose={closeModalAddHandler}></ModalAdd>
     </div>
   );
 };
