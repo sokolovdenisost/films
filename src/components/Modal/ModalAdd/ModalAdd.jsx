@@ -27,6 +27,11 @@ export const ModalAdd = ({ active, setActive, title }) => {
 
   function closeModalHandler() {
     setActive(false);
+    resetForm();
+  }
+
+  function resetForm() {
+    Object.keys(form).forEach((key) => setForm((state) => ({ ...state, [key]: "" })));
   }
 
   function changeInputHandler(e) {
@@ -57,15 +62,39 @@ export const ModalAdd = ({ active, setActive, title }) => {
     <Modal active={active} setActive={setActive} title={title} onClose={closeModalHandler}>
       <div className="modal-add">
         <div className="modal-add__form">
-          <Input placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
-          <Input placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
-          <Input placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
-          <Input placeholder="Жанр" id="genre" error={modalErrors.genre} onChange={changeInputHandler}></Input>
-          <Input placeholder="Режиссер" id="director" error={modalErrors.director} onChange={changeInputHandler}></Input>
-          <Input placeholder="Бюджет ($, дол, руб, евро)" id="budget" error={modalErrors.budget} onChange={changeInputHandler}></Input>
-          <Input placeholder="URL Изображения" id="img" error={modalErrors.img} onChange={changeInputHandler}></Input>
-          <Input placeholder="URL Трейлера (youtube)" id="trailer" error={modalErrors.trailer} onChange={changeInputHandler}></Input>
-          <Input placeholder="Описание" id="description" error={modalErrors.description} onChange={changeInputHandler}></Input>
+          <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
+          <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
+          <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
+          <Input value={form.genre} placeholder="Жанр" id="genre" error={modalErrors.genre} onChange={changeInputHandler}></Input>
+          <Input
+            value={form.director}
+            placeholder="Режиссер"
+            id="director"
+            error={modalErrors.director}
+            onChange={changeInputHandler}
+          ></Input>
+          <Input
+            value={form.budget}
+            placeholder="Бюджет ($, дол, руб, евро)"
+            id="budget"
+            error={modalErrors.budget}
+            onChange={changeInputHandler}
+          ></Input>
+          <Input value={form.img} placeholder="URL Изображения" id="img" error={modalErrors.img} onChange={changeInputHandler}></Input>
+          <Input
+            value={form.trailer}
+            placeholder="URL Трейлера (youtube)"
+            id="trailer"
+            error={modalErrors.trailer}
+            onChange={changeInputHandler}
+          ></Input>
+          <Input
+            value={form.description}
+            placeholder="Описание"
+            id="description"
+            error={modalErrors.description}
+            onChange={changeInputHandler}
+          ></Input>
         </div>
         <div className="modal-add__buttons">
           <Button title="Отмена" color="white" onClick={closeModalHandler}></Button>
