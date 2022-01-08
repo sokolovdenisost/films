@@ -24,10 +24,7 @@ export const addFilm = (film) => async (dispatch) => {
     .then((res) => res.json())
     .catch((err) => alert("Ошибка. Сообщение не дошло до сервера!"))
     .then((res) => {
-      console.log("res1", res);
-
       if (res) {
-        console.log("res2", res);
         dispatch({
           type: ADD_FILM,
           payload: res,
