@@ -1,5 +1,6 @@
 import { JSON_API } from "../../consts";
-import { ADD_FILM, GET_FILMS, TOGGLE_MODAL } from "../types";
+import { ADD_FILM, GET_FILMS } from "../types";
+import { toggleAddModal } from "./mainAction";
 
 export const getFilms = () => async (dispatch) => {
   await fetch(`${JSON_API}/films`)
@@ -26,14 +27,8 @@ export const addFilm = (film) => async (dispatch) => {
         type: ADD_FILM,
         payload: res,
       });
-      toggleModal();
+
+      toggleAddModal();
     })
     .catch((err) => alert("Ошибка"));
-};
-
-export const toggleModal = () => async (dispatch) => {
-  dispatch({
-    type: TOGGLE_MODAL,
-    payload: null,
-  });
 };
