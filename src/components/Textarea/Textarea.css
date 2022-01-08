@@ -1,0 +1,39 @@
+.textarea-block {
+  margin-bottom: 10px;
+}
+
+.textarea-block:last-child {
+  margin-bottom: 0;
+}
+
+.textarea {
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 200px;
+  min-height: 100px;
+  border-radius: 5px;
+  border: 1px solid #080808;
+  padding: 10px 15px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.textarea.error {
+  border: 1px solid #ff4e4e;
+}
+
+.textarea.error::placeholder {
+  color: #ff4e4e;
+}
+
+.textarea:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.textarea-error {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff4e4e;
+  margin-top: 2px;
+}

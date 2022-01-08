@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  padding: 20px 0;
+  background-color: #131313;
+  margin-bottom: 50px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content__title {
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.header-content__title span {
+  color: #ff4e4e;
+}
