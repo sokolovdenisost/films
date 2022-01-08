@@ -1,0 +1,20 @@
+.modal-edit {
+  width: 400px;
+}
+
+.modal-edit__form {
+  overflow-y: auto;
+}
+
+.modal-edit__buttons {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 550px) {
+  .modal-edit {
+    width: 260px;
+  }
+}

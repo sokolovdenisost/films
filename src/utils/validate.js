@@ -6,7 +6,7 @@ export const validateField = (type, value) => {
 };
 
 function validateEmpty(field, value) {
-  if (!value.trim()) return `Ошибка. Поле "${fields[field]}" не может быть пустым.`;
+  if (field !== "id" && !value.trim()) return `Ошибка. Поле "${fields[field]}" не может быть пустым.`;
 }
 
 function validateValue(field, value) {

@@ -1,4 +1,4 @@
-import { ADD_FILM, GET_FILMS } from "../types";
+import { ADD_FILM, DELETE_FILM, EDIT_FILM, GET_FILMS } from "../types";
 
 const initialState = {
   films: [],
@@ -19,6 +19,15 @@ export const filmsReducers = (state = initialState, action) => {
         ...state,
         films: [...state.films, action.payload],
       };
+
+    case DELETE_FILM:
+      return { ...state, films: state.films.filter((film) => film.id !== action.payload) };
+
+    // case EDIT_FILM:
+    //   return {
+    //     ...state,
+    //     films: state.films.forEach,
+    //   };
 
     default:
       return state;

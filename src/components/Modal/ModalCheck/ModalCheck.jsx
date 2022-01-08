@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./ModalCheck.css";
 import { Button } from "../../Button/Button";
 
-export const ModalCheck = ({ active, setActive, title, film }) => {
+export const ModalCheck = ({ active, setActive, film }) => {
   function closeModalHandler() {
     setActive(false);
   }
@@ -12,7 +12,7 @@ export const ModalCheck = ({ active, setActive, title, film }) => {
   const { height } = window.screen;
 
   return (
-    <Modal active={active} setActive={setActive} title={title} onClose={closeModalHandler}>
+    <Modal active={active} title={film.name} onClose={closeModalHandler}>
       <div className="modal-check">
         <ul className="modal-check__list" style={{ maxHeight: height < 1000 ? height - 200 : 650 }}>
           <li className="modal-check__item">
@@ -54,7 +54,6 @@ export const ModalCheck = ({ active, setActive, title, film }) => {
 ModalCheck.propTypes = {
   active: PropTypes.bool.isRequired,
   setActive: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
   film: PropTypes.shape({
     name: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,

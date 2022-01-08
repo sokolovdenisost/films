@@ -3,12 +3,18 @@ import { Button } from "../Button/Button";
 import PropTypes from "prop-types";
 import "./Card.css";
 import { ModalCheck } from "../Modal/ModalCheck/ModalCheck";
+import { ModalEdit } from "../Modal/ModalEdit/ModalEdit";
 
 export const Card = ({ film }) => {
-  const [modal, setModal] = useState(false);
+  const [modalCheck, setModalCheck] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
-  function openModalHandler() {
-    setModal(true);
+  function openCheckModalHandler() {
+    setModalCheck(true);
+  }
+
+  function openEditModalHandler() {
+    setModalEdit(true);
   }
 
   return (
@@ -18,10 +24,12 @@ export const Card = ({ film }) => {
         <div className="card-info__title">{film.name}</div>
         <div className="card-info__genre">{film.genre}</div>
         <div className="card-info__buttons">
-          <Button title="Быстрый просмотр" color="white" onClick={openModalHandler}></Button>
+          <Button title="Быстрый просмотр" color="white" onClick={openCheckModalHandler}></Button>
+          <Button margin="5px 0 0" title="Редактировать" color="red" onClick={openEditModalHandler}></Button>
         </div>
       </div>
-      <ModalCheck active={modal} setActive={setModal} film={film} title={film.name}></ModalCheck>
+      {modalCheck && <ModalCheck active={modalCheck} setActive={setModalCheck} film={film}></ModalCheck>}
+      {modalEdit && <ModalEdit active={modalEdit} setActive={setModalEdit} film={film}></ModalEdit>}
     </div>
   );
 };

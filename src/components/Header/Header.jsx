@@ -30,7 +30,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <ModalAdd title="Добавление фильма" active={addFilmModal} onClose={closeModalAddHandler}></ModalAdd>
+      {addFilmModal && <ModalAdd title="Добавление фильма" active={addFilmModal} onClose={closeModalAddHandler}></ModalAdd>}
     </div>
   );
 };

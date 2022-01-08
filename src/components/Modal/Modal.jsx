@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import "./Modal.css";
 
 export const Modal = ({ active, title, children, onClose }) => {
   function clickHandler() {
-    if (onClose) return onClose();
+    if (onClose) {
+      document.body.style.overflow = "auto";
+      onClose();
+    }
   }
 
   function resetEvent(e) {
@@ -13,8 +16,6 @@ export const Modal = ({ active, title, children, onClose }) => {
 
   if (active) {
     document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
   }
 
   return (

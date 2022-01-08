@@ -1,38 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "../Modal";
 import PropTypes from "prop-types";
-import "./ModalAdd.css";
+import "./ModalEdit.css";
 import { Input } from "../../Input/Input";
 import { Button } from "../../Button/Button";
-import { validateField } from "../../../utils/validate";
-import { useDispatch } from "react-redux";
-import { addFilm } from "../../../store/actions/filmsAction";
-import { useSelector } from "react-redux";
-import { resetError, setError } from "../../../store/actions/errorsAction";
 import { Textarea } from "../../Textarea/Textarea";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteFilm, editFilm } from "../../../store/actions/filmsAction";
+import { resetError, setError } from "../../../store/actions/errorsAction";
+import { validateField } from "../../../utils/validate";
 
-export const ModalAdd = ({ active, onClose, title }) => {
+export const ModalEdit = ({ active, setActive, film }) => {
   const dispatch = useDispatch();
-  const [form, setForm] = useState({
-    name: "",
-    year: "",
-    country: "",
-    genre: "",
-    director: "",
-    budget: "",
-    img: "",
-    trailer: "",
-    description: "",
-  });
+  const [form, setForm] = useState(film);
   const { modalErrors } = useSelector((state) => state.errors);
 
   function closeModalHandler() {
-    if (onClose) onClose();
+    setActive(false);
     resetFormErrors();
   }
 
   function resetFormErrors() {
-    Object.keys(form).forEach((key) => setForm((state) => ({ ...state, [key]: "" })));
+    Object.keys(form).forEach((key) => setForm((state) => ({ ...state, [key]: film[key] })));
     Object.keys(modalErrors).forEach((key) => dispatch(resetError(key)));
   }
 
@@ -53,19 +43,24 @@ export const ModalAdd = ({ active, onClose, title }) => {
     return error;
   }
 
-  function addFilmHandler() {
+  function editFilmHandler() {
+    console.log(form);
     if (!validateForm()) {
-      dispatch(addFilm(form));
+      dispatch(editFilm(film.id, form));
       closeModalHandler();
     }
+  }
+
+  function deleteFilmHandler() {
+    dispatch(deleteFilm(film.id));
   }
 
   const { height } = window.screen;
 
   return (
-    <Modal active={active} title={title} onClose={closeModalHandler}>
-      <div className="modal-add">
-        <div className="modal-add__form" style={{ maxHeight: height < 1000 ? height - 200 : null }}>
+    <Modal active={active} title={`Редактирование "${film.name}"`} onClose={closeModalHandler}>
+      <div className="modal-edit">
+        <div className="modal-edit__form" style={{ maxHeight: height < 1000 ? height - 200 : null }}>
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
           <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
           <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
@@ -100,17 +95,25 @@ export const ModalAdd = ({ active, onClose, title }) => {
             onChange={changeInputHandler}
           ></Textarea>
         </div>
-        <div className="modal-add__buttons">
-          <Button title="Отмена" color="white" onClick={closeModalHandler}></Button>
-          <Button title="Добавить фильм" color="red" onClick={addFilmHandler}></Button>
+        <div className="modal-edit__buttons">
+          <Button title="Удалить" color="red" onClick={deleteFilmHandler}></Button>
+          <Button title="Сохранить" color="white" onClick={editFilmHandler}></Button>
         </div>
       </div>
     </Modal>
   );
 };
 
-ModalAdd.propTypes = {
+ModalEdit.propTypes = {
   active: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  setActive: PropTypes.func.isRequired,
+  film: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    trailer: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
 };
