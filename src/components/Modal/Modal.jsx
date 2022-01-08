@@ -11,6 +11,12 @@ export const Modal = ({ active, title, children, onClose }) => {
     e.stopPropagation();
   }
 
+  if (active) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
   return (
     <div className={`modal ${active ? "active" : ""}`} onClick={clickHandler}>
       <div className="modal-block" onClick={resetEvent}>

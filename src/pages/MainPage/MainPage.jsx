@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Card } from "../../components/Card/Card";
+import { Loader } from "../../components/Loader/Loader";
 import { getFilms } from "../../store/actions/filmsAction";
 import "./MainPage.css";
 
@@ -17,9 +18,7 @@ export const MainPage = () => {
 
   return (
     <div className="mainpage">
-      <div className="container">
-        <div className="mainpage-content">{loading ? "loading" : mapFilms}</div>
-      </div>
+      <div className="container">{loading ? <Loader /> : <div className="mainpage-content">{mapFilms}</div>}</div>
     </div>
   );
 };
