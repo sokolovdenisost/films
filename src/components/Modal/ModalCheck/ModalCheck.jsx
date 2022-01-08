@@ -31,16 +31,12 @@ export const ModalCheck = ({ active, setActive, title, film }) => {
             <div className="modal-item__description">{film.genre}</div>
           </li>
           <li className="modal-check__item">
-            <div className="modal-item__title">Режиссер</div>
-            <div className="modal-item__description">{film.director}</div>
-          </li>
-          <li className="modal-check__item">
-            <div className="modal-item__title">Бюджет</div>
-            <div className="modal-item__description">{film.budget}</div>
-          </li>
-          <li className="modal-check__item">
             <div className="modal-item__title">Трейлер</div>
-            <div className="modal-item__description">{film.trailer}</div>
+            <div className="modal-item__description">
+              <a href={film.trailer} target="_blank">
+                <Button title="Ссылка на трейлер" color="white"></Button>
+              </a>
+            </div>
           </li>
           <li className="modal-check__item">
             <div className="modal-item__title">Описание</div>
@@ -64,8 +60,6 @@ ModalCheck.propTypes = {
     year: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    budget: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     trailer: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
