@@ -23,12 +23,14 @@ export const addFilm = (film) => async (dispatch) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      dispatch({
-        type: ADD_FILM,
-        payload: res,
-      });
+      if (res) {
+        dispatch({
+          type: ADD_FILM,
+          payload: res,
+        });
 
-      toggleAddModal();
+        toggleAddModal();
+      }
     })
-    .catch((err) => alert("Ошибка"));
+    .catch((err) => alert("Ошибка. Сообщение не дошло до сервера!"));
 };

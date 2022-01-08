@@ -18,8 +18,8 @@ export const Modal = ({ active, title, children, onClose }) => {
   }
 
   return (
-    <div className={`modal ${active ? "active" : ""}`} onClick={clickHandler}>
-      <div className="modal-block" onClick={resetEvent}>
+    <div className={`modal ${active ? "active" : ""}`} onMouseDown={clickHandler}>
+      <div className="modal-block" onMouseDown={resetEvent}>
         <div className="modal-block__title">{title}</div>
         <div className="modal-block__body">{children}</div>
       </div>

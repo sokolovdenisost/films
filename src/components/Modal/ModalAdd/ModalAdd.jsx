@@ -39,7 +39,6 @@ export const ModalAdd = ({ active, onClose, title }) => {
   function changeInputHandler(e) {
     const { id, value } = e.target;
     setForm({ ...form, [id]: value });
-    console.log("test");
 
     if (modalErrors[id]) dispatch(resetError(id));
   }

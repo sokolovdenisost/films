@@ -12,7 +12,7 @@ function validateEmpty(field, value) {
 function validateValue(field, value) {
   switch (field) {
     case "year":
-      if (isNaN(parseInt(value))) return `Ошибка. Пример: 2021`;
+      if (isNaN(parseInt(value))) return `Ошибка. Год должен быть из цифр. Пример: 2021`;
       if (value.split("").length !== 4) return `Ошибка. Год должен содержать 4 цифры.`;
       return null;
 
