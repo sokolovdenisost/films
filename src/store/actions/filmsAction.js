@@ -48,8 +48,6 @@ export const deleteFilm = (id) => async (dispatch) => {
           type: DELETE_FILM,
           payload: id,
         });
-
-        toggleAddModal();
       }
     });
 };
@@ -67,13 +65,10 @@ export const editFilm = (id, form) => async (dispatch) => {
     .catch((err) => alert("Ошибка. Сообщение не дошло до сервера!"))
     .then((res) => {
       if (res) {
-        console.log(res);
         dispatch({
           type: EDIT_FILM,
           payload: res,
         });
-
-        toggleAddModal();
       }
     });
 };

@@ -2,6 +2,7 @@ import { TOGGLE_ADD_MODAL } from "../types";
 
 const initialState = {
   addFilmModal: false,
+  scrollbar: true,
 };
 
 export const mainReducers = (state = initialState, action) => {

@@ -1,11 +1,12 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./Modal.css";
+import { toggleScrollbar } from "../../utils/scrollbar";
 
 export const Modal = ({ active, title, children, onClose }) => {
   function clickHandler() {
     if (onClose) {
-      document.body.style.overflow = "auto";
+      toggleScrollbar(false);
       onClose();
     }
   }
@@ -15,7 +16,7 @@ export const Modal = ({ active, title, children, onClose }) => {
   }
 
   if (active) {
-    document.body.style.overflow = "hidden";
+    toggleScrollbar(true);
   }
 
   return (

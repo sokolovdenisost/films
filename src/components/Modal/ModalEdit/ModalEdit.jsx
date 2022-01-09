@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { deleteFilm, editFilm } from "../../../store/actions/filmsAction";
 import { resetError, setError } from "../../../store/actions/errorsAction";
 import { validateField } from "../../../utils/validate";
+import { toggleScrollbar } from "../../../utils/scrollbar";
 
 export const ModalEdit = ({ active, setActive, film }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const ModalEdit = ({ active, setActive, film }) => {
   function closeModalHandler() {
     setActive(false);
     resetFormErrors();
+    toggleScrollbar(false);
   }
 
   function resetFormErrors() {
@@ -44,15 +46,17 @@ export const ModalEdit = ({ active, setActive, film }) => {
   }
 
   function editFilmHandler() {
-    console.log(form);
     if (!validateForm()) {
       dispatch(editFilm(film.id, form));
       closeModalHandler();
     }
   }
 
+  console.log(active);
+
   function deleteFilmHandler() {
     dispatch(deleteFilm(film.id));
+    closeModalHandler();
   }
 
   const { height } = window.screen;
@@ -60,7 +64,7 @@ export const ModalEdit = ({ active, setActive, film }) => {
   return (
     <Modal active={active} title={`Редактирование "${film.name}"`} onClose={closeModalHandler}>
       <div className="modal-edit">
-        <div className="modal-edit__form" style={{ maxHeight: height < 1000 ? height - 200 : null }}>
+        <div className="modal-edit__form" style={{ maxHeight: height < 1000 ? height - 270 : null }}>
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
           <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
           <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>

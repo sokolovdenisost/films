@@ -14,7 +14,7 @@ export const MainPage = () => {
     dispatch(getFilms());
   }, []);
 
-  const mapFilms = films.map((film) => <Card film={film} key={film.id} />).reverse();
+  const mapFilms = films.map((film, idx) => <Card film={film} key={film.id} />).reverse();
 
   return (
     <div className="mainpage">

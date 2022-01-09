@@ -35,3 +35,9 @@
 .modal-block__body {
   margin-top: 25px;
 }
+
+@media (max-width: 550px) {
+  .modal-block__title {
+    width: 260px;
+  }
+}

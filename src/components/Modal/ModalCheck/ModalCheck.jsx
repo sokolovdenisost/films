@@ -14,7 +14,7 @@ export const ModalCheck = ({ active, setActive, film }) => {
   return (
     <Modal active={active} title={film.name} onClose={closeModalHandler}>
       <div className="modal-check">
-        <ul className="modal-check__list" style={{ maxHeight: height < 1000 ? height - 200 : 650 }}>
+        <ul className="modal-check__list" style={{ maxHeight: height < 1000 ? height - 270 : 650 }}>
           <li className="modal-check__item">
             <img src={film.img} alt={film.name} className="modal-check__img" />
           </li>

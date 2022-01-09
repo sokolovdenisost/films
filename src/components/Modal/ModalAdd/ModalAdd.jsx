@@ -10,6 +10,7 @@ import { addFilm } from "../../../store/actions/filmsAction";
 import { useSelector } from "react-redux";
 import { resetError, setError } from "../../../store/actions/errorsAction";
 import { Textarea } from "../../Textarea/Textarea";
+import { toggleScrollbar } from "../../../utils/scrollbar";
 
 export const ModalAdd = ({ active, onClose, title }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export const ModalAdd = ({ active, onClose, title }) => {
   function closeModalHandler() {
     if (onClose) onClose();
     resetFormErrors();
+    toggleScrollbar(false);
   }
 
   function resetFormErrors() {
@@ -65,7 +67,7 @@ export const ModalAdd = ({ active, onClose, title }) => {
   return (
     <Modal active={active} title={title} onClose={closeModalHandler}>
       <div className="modal-add">
-        <div className="modal-add__form" style={{ maxHeight: height < 1000 ? height - 200 : null }}>
+        <div className="modal-add__form" style={{ maxHeight: height < 1000 ? height - 270 : null }}>
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
           <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
           <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>

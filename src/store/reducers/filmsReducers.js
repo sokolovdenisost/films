@@ -23,11 +23,11 @@ export const filmsReducers = (state = initialState, action) => {
     case DELETE_FILM:
       return { ...state, films: state.films.filter((film) => film.id !== action.payload) };
 
-    // case EDIT_FILM:
-    //   return {
-    //     ...state,
-    //     films: state.films.forEach,
-    //   };
+    case EDIT_FILM:
+      return {
+        ...state,
+        films: state.films.map((film) => (film.id === action.payload.id ? action.payload : film)),
+      };
 
     default:
       return state;
