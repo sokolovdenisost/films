@@ -18,7 +18,9 @@ export const MainPage = () => {
 
   return (
     <div className="mainpage">
-      <div className="container">{loading ? <Loader /> : <div className="mainpage-content">{mapFilms}</div>}</div>
+      <div className="container">
+        <div className="mainpage-content">{loading ? <Loader /> : <div className="mainpage-content__films">{mapFilms}</div>}</div>
+      </div>
     </div>
   );
 };
