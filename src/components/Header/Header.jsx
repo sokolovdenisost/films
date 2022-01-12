@@ -11,11 +11,11 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   function openModalAddHandler() {
-    dispatch(toggleAddModal());
+    dispatch(toggleAddModal(true));
   }
 
   function closeModalAddHandler() {
-    dispatch(toggleAddModal());
+    dispatch(toggleAddModal(false));
   }
 
   return (
@@ -30,7 +30,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      {addFilmModal && <ModalAdd title="Добавление фильма" active={addFilmModal} onClose={closeModalAddHandler}></ModalAdd>}
+      <ModalAdd title="Добавление фильма" active={addFilmModal} onClose={closeModalAddHandler}></ModalAdd>
     </div>
   );
 };

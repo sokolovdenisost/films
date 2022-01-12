@@ -1,9 +1,22 @@
-export const validateField = (type, value) => {
+import { setError } from "../store/actions/errorsAction";
+
+export const isValidForm = (form, dispatch) => {
+  let error = false;
+
+  Object.keys(form).forEach((key) => {
+    if (validateField(key, form[key]) !== null) error = true;
+    dispatch(setError(key, validateField(key, form[key])));
+  });
+
+  return error;
+};
+
+function validateField(type, value) {
   if (validateEmpty(type, value)) return validateEmpty(type, value);
   if (validateValue(type, value)) return validateValue(type, value);
 
   return null;
-};
+}
 
 function validateEmpty(field, value) {
   if (field !== "id" && !value.trim()) return `Ошибка. Поле "${fields[field]}" не может быть пустым.`;

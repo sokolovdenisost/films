@@ -28,8 +28,8 @@ export const Card = ({ film }) => {
           <Button margin="5px 0 0" title="Редактировать" color="red" onClick={openEditModalHandler}></Button>
         </div>
       </div>
-      {modalCheck && <ModalCheck active={modalCheck} setActive={setModalCheck} film={film}></ModalCheck>}
-      {modalEdit && <ModalEdit active={modalEdit} setActive={setModalEdit} film={film}></ModalEdit>}
+      <ModalCheck active={modalCheck} setActive={setModalCheck} film={film}></ModalCheck>
+      <ModalEdit active={modalEdit} setActive={setModalEdit} film={film}></ModalEdit>
     </div>
   );
 };

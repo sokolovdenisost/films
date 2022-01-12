@@ -10,7 +10,7 @@ export const mainReducers = (state = initialState, action) => {
     case TOGGLE_ADD_MODAL:
       return {
         ...state,
-        addFilmModal: !state.addFilmModal,
+        addFilmModal: action.payload,
       };
 
     default:

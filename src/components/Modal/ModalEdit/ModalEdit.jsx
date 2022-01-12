@@ -9,8 +9,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteFilm, editFilm } from "../../../store/actions/filmsAction";
 import { resetError, setError } from "../../../store/actions/errorsAction";
-import { validateField } from "../../../utils/validate";
+import { isValidForm, validateField } from "../../../utils/validate";
 import { toggleScrollbar } from "../../../utils/scrollbar";
+import { resetFormErrors } from "../../../utils/reset";
+import { changeInput } from "../../../utils/change";
 
 export const ModalEdit = ({ active, setActive, film }) => {
   const dispatch = useDispatch();
@@ -19,52 +21,30 @@ export const ModalEdit = ({ active, setActive, film }) => {
 
   function closeModalHandler() {
     setActive(false);
-    resetFormErrors();
+    resetFormErrors(form, setForm, modalErrors, dispatch, film);
     toggleScrollbar(false);
   }
 
-  function resetFormErrors() {
-    Object.keys(form).forEach((key) => setForm((state) => ({ ...state, [key]: film[key] })));
-    Object.keys(modalErrors).forEach((key) => dispatch(resetError(key)));
-  }
-
   function changeInputHandler(e) {
-    const { id, value } = e.target;
-    setForm({ ...form, [id]: value });
-
-    if (modalErrors[id]) dispatch(resetError(id));
-  }
-
-  function validateForm() {
-    let error = false;
-    Object.keys(form).forEach((key) => {
-      if (validateField(key, form[key]) !== null) error = true;
-      dispatch(setError(key, validateField(key, form[key])));
-    });
-
-    return error;
+    changeInput(e, form, setForm, dispatch, modalErrors);
   }
 
   function editFilmHandler() {
-    if (!validateForm()) {
+    if (!isValidForm(form, dispatch)) {
       dispatch(editFilm(film.id, form));
       closeModalHandler();
     }
   }
-
-  console.log(active);
 
   function deleteFilmHandler() {
     dispatch(deleteFilm(film.id));
     closeModalHandler();
   }
 
-  const { height } = window.screen;
-
   return (
     <Modal active={active} title={`Редактирование "${film.name}"`} onClose={closeModalHandler}>
       <div className="modal-edit">
-        <div className="modal-edit__form" style={{ maxHeight: height < 1000 ? height - 270 : null }}>
+        <div className="modal-edit__form">
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
           <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
           <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
