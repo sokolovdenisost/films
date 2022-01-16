@@ -1,21 +1,18 @@
 .mainpage-content {
-}
-
-.mainpage-content__films {
   display: grid;
   grid-template-columns: 500px 500px;
   grid-row-gap: 10px;
 }
 
 @media (max-width: 1100px) {
-  .mainpage-content__films {
+  .mainpage-content {
     justify-content: center;
     grid-template-columns: 500px;
   }
 }
 
 @media (max-width: 550px) {
-  .mainpage-content__films {
+  .mainpage-content {
     justify-content: center;
     grid-template-columns: 300px;
   }
