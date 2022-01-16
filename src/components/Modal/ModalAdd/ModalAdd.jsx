@@ -32,7 +32,6 @@ export const ModalAdd = ({ active, onClose, title }) => {
   function closeModalHandler() {
     if (onClose) onClose();
     resetFormErrors(form, setForm, modalErrors, dispatch);
-    toggleScrollbar(false);
   }
 
   function changeInputHandler(e) {

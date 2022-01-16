@@ -4,7 +4,7 @@ import "./Button.css";
 
 export const Button = ({ title, color, onClick, margin }) => {
   function clickHandler() {
-    if (onClick) return onClick();
+    if (onClick) onClick();
   }
 
   return (

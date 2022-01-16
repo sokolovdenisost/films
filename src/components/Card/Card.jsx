@@ -1,20 +1,19 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { Button } from "../Button/Button";
 import PropTypes from "prop-types";
 import "./Card.css";
-import { ModalCheck } from "../Modal/ModalCheck/ModalCheck";
-import { ModalEdit } from "../Modal/ModalEdit/ModalEdit";
+import { useDispatch } from "react-redux";
+import { toggleCheckModal, toggleEditModal } from "../../store/actions/mainAction";
 
 export const Card = ({ film }) => {
-  const [modalCheck, setModalCheck] = useState(false);
-  const [modalEdit, setModalEdit] = useState(false);
+  const dispatch = useDispatch();
 
   function openCheckModalHandler() {
-    setModalCheck(true);
+    dispatch(toggleCheckModal(true, film));
   }
 
   function openEditModalHandler() {
-    setModalEdit(true);
+    dispatch(toggleEditModal(true, film));
   }
 
   return (
@@ -28,8 +27,6 @@ export const Card = ({ film }) => {
           <Button margin="5px 0 0" title="Редактировать" color="red" onClick={openEditModalHandler}></Button>
         </div>
       </div>
-      <ModalCheck active={modalCheck} setActive={setModalCheck} film={film}></ModalCheck>
-      <ModalEdit active={modalEdit} setActive={setModalEdit} film={film}></ModalEdit>
     </div>
   );
 };

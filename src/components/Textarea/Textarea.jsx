@@ -4,7 +4,7 @@ import "./Textarea.css";
 
 export const Textarea = ({ value, placeholder, id, error, onChange }) => {
   function changeHandler(e) {
-    if (onChange) return onChange(e);
+    if (onChange) onChange(e);
   }
 
   return (

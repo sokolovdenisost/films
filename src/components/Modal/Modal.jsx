@@ -11,17 +11,14 @@ export const Modal = ({ active, title, children, onClose }) => {
     }
   }
 
-  const resetEvent = (e) => {
-    e.stopPropagation();
-  };
-
   if (active) {
     toggleScrollbar(true);
   }
 
   return (
-    <div className={`modal ${active || ""}`} onMouseDown={clickHandler}>
-      <div className="modal-block" onMouseDown={resetEvent}>
+    <div className={`modal ${active || ""}`}>
+      <div className="modal-overlay" onClick={clickHandler}></div>
+      <div className="modal-block">
         <div className="modal-block__title">{title}</div>
         <div className="modal-block__body">{children}</div>
       </div>

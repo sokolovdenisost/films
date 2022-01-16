@@ -8,21 +8,20 @@ import { Textarea } from "../../Textarea/Textarea";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteFilm, editFilm } from "../../../store/actions/filmsAction";
-import { resetError, setError } from "../../../store/actions/errorsAction";
-import { isValidForm, validateField } from "../../../utils/validate";
-import { toggleScrollbar } from "../../../utils/scrollbar";
+import { isValidForm } from "../../../utils/validate";
 import { resetFormErrors } from "../../../utils/reset";
 import { changeInput } from "../../../utils/change";
+import { toggleEditModal } from "../../../store/actions/mainAction";
 
-export const ModalEdit = ({ active, setActive, film }) => {
+export const ModalEdit = ({ active }) => {
   const dispatch = useDispatch();
-  const [form, setForm] = useState(film);
+  const { selectedFilm } = useSelector((state) => state.main);
+  const [form, setForm] = useState(selectedFilm);
   const { modalErrors } = useSelector((state) => state.errors);
 
   function closeModalHandler() {
-    setActive(false);
-    resetFormErrors(form, setForm, modalErrors, dispatch, film);
-    toggleScrollbar(false);
+    dispatch(toggleEditModal(false));
+    resetFormErrors(form, setForm, modalErrors, dispatch, selectedFilm);
   }
 
   function changeInputHandler(e) {
@@ -31,18 +30,23 @@ export const ModalEdit = ({ active, setActive, film }) => {
 
   function editFilmHandler() {
     if (!isValidForm(form, dispatch)) {
-      dispatch(editFilm(film.id, form));
+      dispatch(editFilm(selectedFilm.id, form));
       closeModalHandler();
     }
   }
 
   function deleteFilmHandler() {
-    dispatch(deleteFilm(film.id));
+    dispatch(deleteFilm(selectedFilm.id));
     closeModalHandler();
   }
 
+  useEffect(() => {
+    setForm(selectedFilm);
+    console.log(selectedFilm);
+  }, [selectedFilm]);
+
   return (
-    <Modal active={active} title={`Редактирование "${film.name}"`} onClose={closeModalHandler}>
+    <Modal active={active} title={`Редактирование "${selectedFilm.name}"`} onClose={closeModalHandler}>
       <div className="modal-edit">
         <div className="modal-edit__form">
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
@@ -90,14 +94,4 @@ export const ModalEdit = ({ active, setActive, film }) => {
 
 ModalEdit.propTypes = {
   active: PropTypes.bool.isRequired,
-  setActive: PropTypes.func.isRequired,
-  film: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    trailer: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }),
 };
