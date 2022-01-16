@@ -3,6 +3,7 @@
 }
 
 .modal-check__list {
+  max-height: calc(100vh - 270px);
   overflow-y: auto;
   overflow-x: hidden;
 }

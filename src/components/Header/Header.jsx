@@ -11,11 +11,11 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   function openModalAddHandler() {
-    dispatch(toggleAddModal());
+    dispatch(toggleAddModal(true));
   }
 
   function closeModalAddHandler() {
-    dispatch(toggleAddModal());
+    dispatch(toggleAddModal(false));
   }
 
   return (

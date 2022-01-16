@@ -1,54 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "../Modal";
 import PropTypes from "prop-types";
-import "./ModalAdd.css";
+import "./ModalEdit.css";
 import { Input } from "../../Input/Input";
 import { Button } from "../../Button/Button";
-import { isValidForm } from "../../../utils/validate";
-import { useDispatch } from "react-redux";
-import { addFilm } from "../../../store/actions/filmsAction";
-import { useSelector } from "react-redux";
-import { resetError, setError } from "../../../store/actions/errorsAction";
 import { Textarea } from "../../Textarea/Textarea";
-import { toggleScrollbar } from "../../../utils/scrollbar";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteFilm, editFilm } from "../../../store/actions/filmsAction";
+import { isValidForm } from "../../../utils/validate";
 import { resetFormErrors } from "../../../utils/reset";
 import { changeInput } from "../../../utils/change";
+import { toggleEditModal } from "../../../store/actions/mainAction";
 
-export const ModalAdd = ({ active, onClose, title }) => {
+export const ModalEdit = ({ active }) => {
   const dispatch = useDispatch();
-  const [form, setForm] = useState({
-    name: "",
-    year: "",
-    country: "",
-    genre: "",
-    director: "",
-    budget: "",
-    img: "",
-    trailer: "",
-    description: "",
-  });
+  const { selectedFilm } = useSelector((state) => state.main);
+  const [form, setForm] = useState(selectedFilm);
   const { modalErrors } = useSelector((state) => state.errors);
 
   function closeModalHandler() {
-    if (onClose) onClose();
-    resetFormErrors(form, setForm, modalErrors, dispatch);
+    dispatch(toggleEditModal(false));
+    resetFormErrors(form, setForm, modalErrors, dispatch, selectedFilm);
   }
 
   function changeInputHandler(e) {
     changeInput(e, form, setForm, dispatch, modalErrors);
   }
 
-  function addFilmHandler() {
+  function editFilmHandler() {
     if (!isValidForm(form, dispatch)) {
-      dispatch(addFilm(form));
+      dispatch(editFilm(selectedFilm.id, form));
       closeModalHandler();
     }
   }
 
+  function deleteFilmHandler() {
+    dispatch(deleteFilm(selectedFilm.id));
+    closeModalHandler();
+  }
+
+  useEffect(() => {
+    setForm(selectedFilm);
+    console.log(selectedFilm);
+  }, [selectedFilm]);
+
   return (
-    <Modal active={active} title={title} onClose={closeModalHandler}>
-      <div className="modal-add">
-        <div className="modal-add__form">
+    <Modal active={active} title={`Редактирование "${selectedFilm.name}"`} onClose={closeModalHandler}>
+      <div className="modal-edit">
+        <div className="modal-edit__form">
           <Input value={form.name} placeholder="Название" id="name" error={modalErrors.name} onChange={changeInputHandler}></Input>
           <Input value={form.year} placeholder="Год" id="year" error={modalErrors.year} onChange={changeInputHandler}></Input>
           <Input value={form.country} placeholder="Страна" id="country" error={modalErrors.country} onChange={changeInputHandler}></Input>
@@ -83,17 +83,15 @@ export const ModalAdd = ({ active, onClose, title }) => {
             onChange={changeInputHandler}
           ></Textarea>
         </div>
-        <div className="modal-add__buttons">
-          <Button title="Отмена" color="white" onClick={closeModalHandler}></Button>
-          <Button title="Добавить фильм" color="red" onClick={addFilmHandler}></Button>
+        <div className="modal-edit__buttons">
+          <Button title="Удалить" color="red" onClick={deleteFilmHandler}></Button>
+          <Button title="Сохранить" color="white" onClick={editFilmHandler}></Button>
         </div>
       </div>
     </Modal>
   );
 };
 
-ModalAdd.propTypes = {
+ModalEdit.propTypes = {
   active: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
 };

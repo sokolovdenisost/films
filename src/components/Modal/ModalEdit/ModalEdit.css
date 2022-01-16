@@ -1,13 +1,13 @@
-.modal-add {
+.modal-edit {
   width: 400px;
 }
 
-.modal-add__form {
+.modal-edit__form {
   overflow-y: auto;
   max-height: calc(100vh - 270px);
 }
 
-.modal-add__buttons {
+.modal-edit__buttons {
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 550px) {
-  .modal-add {
+  .modal-edit {
     width: 260px;
   }
 }

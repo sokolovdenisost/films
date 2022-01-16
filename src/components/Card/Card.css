@@ -7,7 +7,8 @@
 
 .card-img {
   height: 300px;
-  width: 210px;
+  min-width: 210px;
+  max-width: 210px;
   object-fit: cover;
   border-radius: 5px;
 }

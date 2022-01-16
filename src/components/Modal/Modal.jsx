@@ -1,25 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Modal.css";
+import { toggleScrollbar } from "../../utils/scrollbar";
 
 export const Modal = ({ active, title, children, onClose }) => {
   function clickHandler() {
-    if (onClose) return onClose();
-  }
-
-  function resetEvent(e) {
-    e.stopPropagation();
+    if (onClose) {
+      toggleScrollbar(false);
+      onClose();
+    }
   }
 
   if (active) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
+    toggleScrollbar(true);
   }
 
   return (
-    <div className={`modal ${active ? "active" : ""}`} onMouseDown={clickHandler}>
-      <div className="modal-block" onMouseDown={resetEvent}>
+    <div className={`modal ${active || ""}`}>
+      <div className="modal-overlay" onClick={clickHandler}></div>
+      <div className="modal-block">
         <div className="modal-block__title">{title}</div>
         <div className="modal-block__body">{children}</div>
       </div>
