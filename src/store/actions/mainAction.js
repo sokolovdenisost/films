@@ -1,4 +1,4 @@
-import { RELOAD_MAIN_STATE, TOGGLE_ADD_MODAL, TOGGLE_CHECK_MODAL, TOGGLE_EDIT_MODAL } from "../types";
+import { TOGGLE_ADD_MODAL, TOGGLE_CHECK_MODAL, TOGGLE_EDIT_MODAL } from "../types";
 
 export const toggleAddModal = (active) => async (dispatch) => {
   dispatch({
@@ -32,10 +32,3 @@ export const toggleEditModal =
       payload: { active, film },
     });
   };
-
-export const reloadMainState = () => async (dispatch) => {
-  dispatch({
-    type: RELOAD_MAIN_STATE,
-    payload: null,
-  });
-};
