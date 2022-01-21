@@ -23,21 +23,19 @@ export const MainPage = () => {
   function changeHandler(e) {
     const { value } = e.target;
     changeInput(e, search, setSearch);
-    dispatch(filteredFilmsByName(value));
+    dispatch(filteredFilmsByName(value.trim()));
   }
-
-  console.log(filteredFilms);
 
   function mapFilmsByCondition() {
     if (filteredFilms.length) {
-      return mapFilteredFilms;
+      return <div className="mainpage-content__films">{mapFilteredFilms}</div>;
     }
 
     if (!filteredFilms.length && search.search) {
       return <div className="mainpage-content__nosearch">По запросу "{search.search}" ничего не найдено.</div>;
     }
 
-    return mapFilms;
+    return <div className="mainpage-content__films">{mapFilms}</div>;
   }
 
   const mapFilms = films.map((film, idx) => <Card film={film} key={film.id} />).reverse();
@@ -48,9 +46,9 @@ export const MainPage = () => {
       <div className="container">
         <div className="mainpage-content">
           <div className="mainpage-content__search">
-            <input type="text" onChange={changeHandler} id="search" className="search-input" />
+            <input type="text" placeholder="Поиск" onChange={changeHandler} id="search" className="search-input" />
           </div>
-          {loading ? <Loader /> : <div className="mainpage-content__films">{mapFilmsByCondition()}</div>}
+          {loading ? <Loader /> : mapFilmsByCondition()}
         </div>
       </div>
       <ModalCheck active={checkFilmModal}></ModalCheck>

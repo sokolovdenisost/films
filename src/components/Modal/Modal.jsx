@@ -4,12 +4,9 @@ import "./Modal.css";
 import { toggleScrollbar } from "../../utils/scrollbar";
 
 export const Modal = ({ active, title, children, onClose }) => {
-  function clickHandler() {
-    if (onClose) {
-      toggleScrollbar(false);
-      onClose();
-    }
-  }
+  const clickHandler = () => {
+    if (onClose) onClose();
+  };
 
   if (active) {
     toggleScrollbar(true);

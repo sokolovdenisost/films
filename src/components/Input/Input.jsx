@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "./Input.css";
 
 export const Input = ({ value, type = "text", placeholder, id, error, onChange }) => {
-  function changeHandler(e) {
-    if (onChange) return onChange(e);
-  }
+  const changeHandler = (e) => {
+    if (onChange) onChange(e);
+  };
 
   return (
     <div className="input-block">

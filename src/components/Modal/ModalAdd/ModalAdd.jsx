@@ -8,13 +8,12 @@ import { isValidForm } from "../../../utils/validate";
 import { useDispatch } from "react-redux";
 import { addFilm } from "../../../store/actions/filmsAction";
 import { useSelector } from "react-redux";
-import { resetError, setError } from "../../../store/actions/errorsAction";
 import { Textarea } from "../../Textarea/Textarea";
-import { toggleScrollbar } from "../../../utils/scrollbar";
 import { resetFormErrors } from "../../../utils/reset";
 import { changeInput } from "../../../utils/change";
+import { toggleAddModal } from "../../../store/actions/mainAction";
 
-export const ModalAdd = ({ active, onClose, title }) => {
+export const ModalAdd = ({ active, title }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
@@ -30,13 +29,13 @@ export const ModalAdd = ({ active, onClose, title }) => {
   const { modalErrors } = useSelector((state) => state.errors);
 
   function closeModalHandler() {
-    if (onClose) onClose();
+    dispatch(toggleAddModal(false));
     resetFormErrors(form, setForm, modalErrors, dispatch);
   }
 
-  function changeInputHandler(e) {
+  const changeInputHandler = (e) => {
     changeInput(e, form, setForm, dispatch, modalErrors);
-  }
+  };
 
   function addFilmHandler() {
     if (!isValidForm(form, dispatch)) {
@@ -94,6 +93,5 @@ export const ModalAdd = ({ active, onClose, title }) => {
 
 ModalAdd.propTypes = {
   active: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };

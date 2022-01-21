@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "./Button.css";
 
 export const Button = ({ title, color, onClick, margin }) => {
-  function clickHandler() {
+  const clickHandler = () => {
     if (onClick) onClick();
-  }
+  };
 
   return (
     <button className={`button ${color}`} style={{ margin }} onClick={clickHandler}>

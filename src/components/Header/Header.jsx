@@ -10,13 +10,9 @@ export const Header = () => {
   const { addFilmModal } = useSelector((state) => state.main);
   const dispatch = useDispatch();
 
-  function openModalAddHandler() {
+  const openModalAddHandler = () => {
     dispatch(toggleAddModal(true));
-  }
-
-  function closeModalAddHandler() {
-    dispatch(toggleAddModal(false));
-  }
+  };
 
   return (
     <div className="header">
@@ -30,7 +26,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <ModalAdd title="Добавление фильма" active={addFilmModal} onClose={closeModalAddHandler}></ModalAdd>
+      <ModalAdd title="Добавление фильма" active={addFilmModal}></ModalAdd>
     </div>
   );
 };
