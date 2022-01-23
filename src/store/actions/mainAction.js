@@ -1,6 +1,9 @@
-import { RELOAD_MAIN_STATE, TOGGLE_ADD_MODAL, TOGGLE_CHECK_MODAL, TOGGLE_EDIT_MODAL } from "../types";
+import { toggleScrollbar } from "../../utils/scrollbar";
+import { TOGGLE_ADD_MODAL, TOGGLE_CHECK_MODAL, TOGGLE_EDIT_MODAL } from "../types";
 
 export const toggleAddModal = (active) => async (dispatch) => {
+  toggleScrollbar(false);
+
   dispatch({
     type: TOGGLE_ADD_MODAL,
     payload: active,
@@ -11,6 +14,7 @@ export const toggleCheckModal =
   (active, film = null) =>
   async (dispatch) => {
     if (film === null) {
+      toggleScrollbar(false);
       film = { name: "", year: "", country: "", genre: "", director: "", budget: "", img: "", trailer: "", description: "" };
     }
 
@@ -24,6 +28,7 @@ export const toggleEditModal =
   (active, film = null) =>
   async (dispatch) => {
     if (film === null) {
+      toggleScrollbar(false);
       film = { name: "", year: "", country: "", genre: "", director: "", budget: "", img: "", trailer: "", description: "" };
     }
 
@@ -32,10 +37,3 @@ export const toggleEditModal =
       payload: { active, film },
     });
   };
-
-export const reloadMainState = () => async (dispatch) => {
-  dispatch({
-    type: RELOAD_MAIN_STATE,
-    payload: null,
-  });
-};

@@ -32,9 +32,6 @@ export const mainReducers = (state = initialState, action) => {
     case TOGGLE_EDIT_MODAL:
       return { ...state, editFilmModal: action.payload.active, selectedFilm: action.payload.film };
 
-    case RELOAD_MAIN_STATE:
-      return { ...state };
-
     default:
       return state;
   }

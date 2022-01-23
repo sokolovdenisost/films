@@ -24,9 +24,9 @@ export const ModalEdit = ({ active }) => {
     resetFormErrors(form, setForm, modalErrors, dispatch, selectedFilm);
   }
 
-  function changeInputHandler(e) {
+  const changeInputHandler = (e) => {
     changeInput(e, form, setForm, dispatch, modalErrors);
-  }
+  };
 
   function editFilmHandler() {
     if (!isValidForm(form, dispatch)) {
@@ -42,7 +42,6 @@ export const ModalEdit = ({ active }) => {
 
   useEffect(() => {
     setForm(selectedFilm);
-    console.log(selectedFilm);
   }, [selectedFilm]);
 
   return (

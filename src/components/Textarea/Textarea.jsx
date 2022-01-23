@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import "./Textarea.css";
 
 export const Textarea = ({ value, placeholder, id, error, onChange }) => {
-  function changeHandler(e) {
+  const changeHandler = (e) => {
     if (onChange) onChange(e);
-  }
+  };
 
   return (
     <div className="textarea-block">

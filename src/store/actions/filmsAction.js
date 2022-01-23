@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { JSON_API } from "../../consts";
-import { ADD_FILM, DELETE_FILM, EDIT_FILM, GET_FILMS } from "../types";
+import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, GET_FILMS } from "../types";
 import { toggleAddModal } from "./mainAction";
 
 export const getFilms = () => async (dispatch) => {
@@ -71,4 +71,11 @@ export const editFilm = (id, form) => async (dispatch) => {
         });
       }
     });
+};
+
+export const filteredFilmsByName = (filter) => async (dispatch) => {
+  dispatch({
+    type: FILTERED_FILMS,
+    payload: filter,
+  });
 };

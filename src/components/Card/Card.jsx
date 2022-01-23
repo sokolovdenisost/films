@@ -8,17 +8,19 @@ import { toggleCheckModal, toggleEditModal } from "../../store/actions/mainActio
 export const Card = ({ film }) => {
   const dispatch = useDispatch();
 
-  function openCheckModalHandler() {
+  const openCheckModalHandler = () => {
     dispatch(toggleCheckModal(true, film));
-  }
+  };
 
-  function openEditModalHandler() {
+  const openEditModalHandler = () => {
     dispatch(toggleEditModal(true, film));
-  }
+  };
 
   return (
     <div className="card">
-      <img src={film.img} alt="" className="card-img" />
+      <div className="card-block__img">
+        <img src={film.img} alt="" className="card-img" />
+      </div>
       <div className="card-info">
         <div className="card-info__title">{film.name}</div>
         <div className="card-info__genre">{film.genre}</div>

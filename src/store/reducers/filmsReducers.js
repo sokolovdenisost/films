@@ -1,7 +1,8 @@
-import { ADD_FILM, DELETE_FILM, EDIT_FILM, GET_FILMS } from "../types";
+import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, GET_FILMS } from "../types";
 
 const initialState = {
   films: [],
+  filteredFilms: [],
   loading: true,
 };
 
@@ -28,6 +29,9 @@ export const filmsReducers = (state = initialState, action) => {
         ...state,
         films: state.films.map((film) => (film.id === action.payload.id ? action.payload : film)),
       };
+
+    case FILTERED_FILMS:
+      return { ...state, filteredFilms: state.films.filter((film) => film.name.toLowerCase().includes(action.payload.toLowerCase())) };
 
     default:
       return state;

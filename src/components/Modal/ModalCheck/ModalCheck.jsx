@@ -10,9 +10,9 @@ export const ModalCheck = ({ active }) => {
   const dispatch = useDispatch();
   const { selectedFilm } = useSelector((state) => state.main);
 
-  function closeModalHandler() {
+  const closeModalHandler = () => {
     dispatch(toggleCheckModal(false));
-  }
+  };
 
   return (
     <Modal active={active} title={selectedFilm.name} onClose={closeModalHandler}>
