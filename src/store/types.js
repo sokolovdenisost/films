@@ -2,6 +2,7 @@ export const GET_FILMS = "GET_FILMS";
 export const ADD_FILM = "ADD_FILM";
 export const DELETE_FILM = "DELETE_FILM";
 export const EDIT_FILM = "EDIT_FILM";
+export const GET_FILM = "GET_FILM";
 
 export const FILTERED_FILMS = "FILTERED_FILMS";
 

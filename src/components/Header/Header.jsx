@@ -18,12 +18,16 @@ export const Header = () => {
     <div className="header">
       <div className="container">
         <div className="header-content">
-          <h1 className="header-content__title">
-            <span>BEST</span>films
-          </h1>
-          <div className="header-content__button">
-            <Button title="Добавить фильм" color="red" onClick={openModalAddHandler}></Button>
-          </div>
+          <a href="/" className="header-content__link">
+            <h1 className="header-content__title">
+              <span>BEST</span>films
+            </h1>
+          </a>
+          {window.location.pathname === "/" && (
+            <div className="header-content__button">
+              <Button title="Добавить фильм" color="red" onClick={openModalAddHandler}></Button>
+            </div>
+          )}
         </div>
       </div>
       <ModalAdd title="Добавление фильма" active={addFilmModal}></ModalAdd>

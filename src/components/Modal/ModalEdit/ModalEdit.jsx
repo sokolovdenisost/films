@@ -19,26 +19,26 @@ export const ModalEdit = ({ active }) => {
   const [form, setForm] = useState(selectedFilm);
   const { modalErrors } = useSelector((state) => state.errors);
 
-  function closeModalHandler() {
+  const closeModalHandler = () => {
     dispatch(toggleEditModal(false));
     resetFormErrors(form, setForm, modalErrors, dispatch, selectedFilm);
-  }
+  };
 
   const changeInputHandler = (e) => {
     changeInput(e, form, setForm, dispatch, modalErrors);
   };
 
-  function editFilmHandler() {
+  const editFilmHandler = () => {
     if (!isValidForm(form, dispatch)) {
       dispatch(editFilm(selectedFilm.id, form));
       closeModalHandler();
     }
-  }
+  };
 
-  function deleteFilmHandler() {
+  const deleteFilmHandler = () => {
     dispatch(deleteFilm(selectedFilm.id));
     closeModalHandler();
-  }
+  };
 
   useEffect(() => {
     setForm(selectedFilm);
