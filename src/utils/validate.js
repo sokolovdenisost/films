@@ -11,18 +11,18 @@ export const isValidForm = (form, dispatch) => {
   return error;
 };
 
-function validateField(type, value) {
+const validateField = (type, value) => {
   if (validateEmpty(type, value)) return validateEmpty(type, value);
   if (validateValue(type, value)) return validateValue(type, value);
 
   return null;
-}
+};
 
-function validateEmpty(field, value) {
+const validateEmpty = (field, value) => {
   if (field !== "id" && !value.trim()) return `Ошибка. Поле "${fields[field]}" не может быть пустым.`;
-}
+};
 
-function validateValue(field, value) {
+const validateValue = (field, value) => {
   switch (field) {
     case "year":
       if (isNaN(parseInt(value))) return `Ошибка. Год должен быть из цифр. Пример: 2021`;
@@ -41,7 +41,7 @@ function validateValue(field, value) {
     default:
       return null;
   }
-}
+};
 
 const fields = {
   name: "Название",

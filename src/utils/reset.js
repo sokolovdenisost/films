@@ -8,3 +8,8 @@ export const resetFormErrors = (form, setForm, errors, dispatch, defaultObj) => 
   }
   Object.keys(errors).forEach((key) => dispatch(resetError(key)));
 };
+
+export const resetEvent = (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+};

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import "./Card.css";
 import { useDispatch } from "react-redux";
 import { toggleCheckModal, toggleEditModal } from "../../store/actions/mainAction";
+import { resetEvent } from "../../utils/reset";
 
 export const Card = ({ film }) => {
   const dispatch = useDispatch();
@@ -17,19 +18,19 @@ export const Card = ({ film }) => {
   };
 
   return (
-    <div className="card">
+    <a className="card" href={`/film/${film.id}`}>
       <div className="card-block__img">
         <img src={film.img} alt="" className="card-img" />
       </div>
       <div className="card-info">
         <div className="card-info__title">{film.name}</div>
         <div className="card-info__genre">{film.genre}</div>
-        <div className="card-info__buttons">
+        <div className="card-info__buttons" onClick={resetEvent}>
           <Button title="Быстрый просмотр" color="white" onClick={openCheckModalHandler}></Button>
           <Button margin="5px 0 0" title="Редактировать" color="red" onClick={openEditModalHandler}></Button>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

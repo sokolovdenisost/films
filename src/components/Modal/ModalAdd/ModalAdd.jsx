@@ -28,21 +28,21 @@ export const ModalAdd = ({ active, title }) => {
   });
   const { modalErrors } = useSelector((state) => state.errors);
 
-  function closeModalHandler() {
+  const closeModalHandler = () => {
     dispatch(toggleAddModal(false));
     resetFormErrors(form, setForm, modalErrors, dispatch);
-  }
+  };
 
   const changeInputHandler = (e) => {
     changeInput(e, form, setForm, dispatch, modalErrors);
   };
 
-  function addFilmHandler() {
+  const addFilmHandler = () => {
     if (!isValidForm(form, dispatch)) {
       dispatch(addFilm(form));
       closeModalHandler();
     }
-  }
+  };
 
   return (
     <Modal active={active} title={title} onClose={closeModalHandler}>
