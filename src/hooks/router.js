@@ -15,7 +15,7 @@ export const useRouter = () => {
       component: <MainPage />,
     },
     {
-      path: "/item/:id",
+      path: "/film/:id",
       component: <FilmPage />,
     },
   ];
