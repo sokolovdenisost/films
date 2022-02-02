@@ -1,27 +1,17 @@
-const jsonServer = require("json-server");
-const server = jsonServer.create();
-const router = jsonServer.router("db.json");
-// const middlewares = jsonServer.defaults({ static: "./build" });
-const port = 3000;
-const cors = require("cors");
-
-server.use(cors());
-
-// server.use(middlewares);
-server.use(router);
-
-server.listen(port);
-
-// react
-
 const express = require("express");
+const jsonServer = require("json-server");
 const path = require("path");
-const app = express();
 
-app.use(express.static(path.join(__dirname, "build")));
+const server = express();
 
-app.get("/*", function (req, res) {
+server.use("/api", jsonServer.router("db.json"));
+
+server.use(express.static(path.join(__dirname, "build")));
+
+server.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.listen(8000);
+server.listen(3000, () => {
+  console.log("Server is running");
+});
