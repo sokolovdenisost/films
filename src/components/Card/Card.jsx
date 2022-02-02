@@ -18,7 +18,7 @@ export const Card = ({ film }) => {
   };
 
   return (
-    <a className="card" href={`/film/${film.id}`}>
+    <a className="card" href={`/item/${film.id}`}>
       <div className="card-block__img">
         <img src={film.img} alt="" className="card-img" />
       </div>
