@@ -7,6 +7,11 @@ const middlewares = jsonServer.defaults({
 const PORT = process.env.PORT || 3001;
 server.use(middlewares);
 server.use(router);
+
+server.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 server.listen(PORT, () => {
   console.log("Server is running");
 });
