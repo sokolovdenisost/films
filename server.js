@@ -1,35 +1,16 @@
 const jsonServer = require("json-server");
-const server = jsonServer.create();
-const router = jsonServer.router("./db.json");
-const middlewares = jsonServer.defaults({
-  static: "./build",
-});
-const PORT = process.env.PORT || 3001;
-server.use(middlewares);
-server.use(router);
+const app = jsonServer.create();
+const path = require("path");
+const express = require("express");
+const middlewares = jsonServer.defaults();
+const router = jsonServer.router("db.json");
+const port = process.env.PORT || 3001;
 
-server.get("*", (req, res) => {
+app.use("/", middlewares, router);
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-server.listen(PORT, () => {
-  console.log("Server is running");
-});
-
-// запуск react static
-// const express = require("express");
-// const path = require("path");
-
-// const app = express();
-
-// app.use(express.static(path.join(__dirname, "build")));
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
-
-// const PORT = 3002;
-
-// app.listen(PORT, () => {
-//   console.log("Server is starting in 3002 port...");
-// });
+server.listen(port);
