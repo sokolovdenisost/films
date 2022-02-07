@@ -1,17 +1,15 @@
-import { useSelector } from "react-redux";
 import { JSON_API } from "../../consts";
-import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, GET_FILM, GET_FILMS } from "../types";
+import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, REQUEST_GET_FILM, REQUEST_GET_FILMS } from "../types";
 import { toggleAddModal } from "./mainAction";
 
-export const getFilms = () => async (dispatch) => {
-  await fetch(`${JSON_API}/films`)
-    .then((res) => res.json())
-    .then((res) => {
-      dispatch({
-        type: GET_FILMS,
-        payload: res,
-      });
-    });
+export const getFilms = () => {
+  return {
+    type: REQUEST_GET_FILMS,
+  };
+};
+
+export const getFilmById = (id) => {
+  return { type: REQUEST_GET_FILM, payload: { id } };
 };
 
 export const addFilm = (film) => async (dispatch) => {
@@ -78,17 +76,4 @@ export const filteredFilmsByName = (filter) => async (dispatch) => {
     type: FILTERED_FILMS,
     payload: filter.toLowerCase(),
   });
-};
-
-export const getFilmById = (id) => async (dispatch) => {
-  await fetch(`${JSON_API}/films/${id}`)
-    .then((res) => res.json())
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: GET_FILM,
-          payload: res,
-        });
-      }
-    });
 };

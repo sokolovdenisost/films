@@ -47,11 +47,9 @@ export const MainPage = () => {
     if (filteredFilms.length) {
       return <div className="mainpage-content__films">{mapFilteredFilms}</div>;
     }
-
     if (!filteredFilms.length && searchParams.get("search")) {
       return <div className="mainpage-content__nosearch">По запросу "{search}" ничего не найдено.</div>;
     }
-
     return <div className="mainpage-content__films">{mapFilms}</div>;
   };
 

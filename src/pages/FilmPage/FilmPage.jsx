@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { E404 } from "../../components/404/404";
 import { Loader } from "../../components/Loader/Loader";
 import { getFilmById } from "../../store/actions/filmsAction";
 import { getYoutubeVideoId } from "../../utils/url";
@@ -18,6 +19,10 @@ export const FilmPage = () => {
 
   if (loading) {
     return <Loader />;
+  }
+
+  if (!Object.keys(film).length) {
+    return <E404 />;
   }
 
   return (

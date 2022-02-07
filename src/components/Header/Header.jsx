@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { toggleAddModal } from "../../store/actions/mainAction";
 import { Button } from "../Button/Button";
 import { ModalAdd } from "../Modal/ModalAdd/ModalAdd";

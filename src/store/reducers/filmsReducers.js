@@ -1,4 +1,14 @@
-import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, GET_FILM, GET_FILMS } from "../types";
+import {
+  ADD_FILM,
+  DELETE_FILM,
+  EDIT_FILM,
+  FILTERED_FILMS,
+  GET_FILM,
+  HIDE_LOADER,
+  SHOW_LOADER,
+  SUCCESS_GET_FILMS,
+  SUCCESS_GET_FILM,
+} from "../types";
 
 const initialState = {
   films: [],
@@ -9,11 +19,10 @@ const initialState = {
 
 export const filmsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case GET_FILMS:
+    case SUCCESS_GET_FILMS:
       return {
         ...state,
         films: action.payload,
-        loading: false,
       };
 
     case ADD_FILM:
@@ -21,6 +30,9 @@ export const filmsReducers = (state = initialState, action) => {
         ...state,
         films: [...state.films, action.payload],
       };
+
+    case SUCCESS_GET_FILM:
+      return { ...state, film: action.payload };
 
     case DELETE_FILM:
       return { ...state, films: state.films.filter((film) => film.id !== action.payload) };
@@ -34,8 +46,11 @@ export const filmsReducers = (state = initialState, action) => {
     case FILTERED_FILMS:
       return { ...state, filteredFilms: state.films.filter((film) => film.name.toLowerCase().includes(action.payload.toLowerCase())) };
 
-    case GET_FILM:
-      return { ...state, film: action.payload, loading: false };
+    case SHOW_LOADER:
+      return { ...state, loading: true };
+
+    case HIDE_LOADER:
+      return { ...state, loading: false };
 
     default:
       return state;
