@@ -1,94 +1,28 @@
-import { useSelector } from "react-redux";
-import { JSON_API } from "../../consts";
-import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, GET_FILM, GET_FILMS } from "../types";
-import { toggleAddModal } from "./mainAction";
+import { FILTERED_FILMS, REQUEST_ADD_FILM, REQUEST_DELETE_FILM, REQUEST_EDIT_FILM, REQUEST_GET_FILM, REQUEST_GET_FILMS } from "../types";
 
-export const getFilms = () => async (dispatch) => {
-  await fetch(`${JSON_API}/films`)
-    .then((res) => res.json())
-    .then((res) => {
-      dispatch({
-        type: GET_FILMS,
-        payload: res,
-      });
-    });
+export const getFilms = () => {
+  return { type: REQUEST_GET_FILMS };
 };
 
-export const addFilm = (film) => async (dispatch) => {
-  await fetch(`${JSON_API}/films`, {
-    method: "POST",
-    body: JSON.stringify(film),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .catch((err) => alert("Ошибка. Сообщение не дошло до сервера!"))
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: ADD_FILM,
-          payload: res,
-        });
-
-        toggleAddModal();
-      }
-    });
+export const getFilmById = (id) => {
+  return { type: REQUEST_GET_FILM, payload: { id } };
 };
 
-export const deleteFilm = (id) => async (dispatch) => {
-  await fetch(`${JSON_API}/films/${id}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .catch((err) => alert("Ошибка. Сообщение не дошло до сервера!"))
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: DELETE_FILM,
-          payload: id,
-        });
-      }
-    });
+export const addFilm = (film) => {
+  return { type: REQUEST_ADD_FILM, payload: { film } };
 };
 
-export const editFilm = (id, form) => async (dispatch) => {
-  await fetch(`${JSON_API}/films/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(form),
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .catch((err) => alert("Ошибка. Сообщение не дошло до сервера!"))
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: EDIT_FILM,
-          payload: res,
-        });
-      }
-    });
+export const deleteFilm = (id) => {
+  return { type: REQUEST_DELETE_FILM, payload: { id } };
 };
 
-export const filteredFilmsByName = (filter) => async (dispatch) => {
-  dispatch({
+export const editFilm = (id, form) => {
+  return { type: REQUEST_EDIT_FILM, payload: { id, form } };
+};
+
+export const filteredFilmsByName = (filter) => {
+  return {
     type: FILTERED_FILMS,
     payload: filter.toLowerCase(),
-  });
-};
-
-export const getFilmById = (id) => async (dispatch) => {
-  await fetch(`${JSON_API}/films/${id}`)
-    .then((res) => res.json())
-    .then((res) => {
-      if (res) {
-        dispatch({
-          type: GET_FILM,
-          payload: res,
-        });
-      }
-    });
+  };
 };

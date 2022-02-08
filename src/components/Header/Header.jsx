@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { toggleAddModal } from "../../store/actions/mainAction";
 import { Button } from "../Button/Button";
 import { ModalAdd } from "../Modal/ModalAdd/ModalAdd";
@@ -9,6 +10,7 @@ import "./Header.css";
 export const Header = () => {
   const { addFilmModal } = useSelector((state) => state.main);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const openModalAddHandler = () => {
     dispatch(toggleAddModal(true));
@@ -23,7 +25,7 @@ export const Header = () => {
               <span>BEST</span>films
             </h1>
           </a>
-          {window.location.pathname === "/" && (
+          {pathname === "/" && (
             <div className="header-content__button">
               <Button title="Добавить фильм" color="red" onClick={openModalAddHandler}></Button>
             </div>

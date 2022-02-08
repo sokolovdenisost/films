@@ -1,31 +1,53 @@
-import { ADD_FILM, DELETE_FILM, EDIT_FILM, FILTERED_FILMS, GET_FILM, GET_FILMS } from "../types";
+import {
+  FILTERED_FILMS,
+  HIDE_LOADER,
+  SHOW_LOADER,
+  SUCCESS_GET_FILMS,
+  SUCCESS_GET_FILM,
+  SUCCESS_ADD_FILM,
+  SUCCESS_DELETE_FILM,
+  SUCCESS_EDIT_FILM,
+} from "../types";
 
 const initialState = {
   films: [],
   filteredFilms: [],
-  film: {},
+  film: {
+    name: "",
+    year: "",
+    country: "",
+    genre: "",
+    director: "",
+    budget: "",
+    img: "",
+    trailer: "",
+    description: "",
+    id: 0,
+  },
   loading: true,
 };
 
 export const filmsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case GET_FILMS:
+    case SUCCESS_GET_FILMS:
       return {
         ...state,
         films: action.payload,
-        loading: false,
       };
 
-    case ADD_FILM:
+    case SUCCESS_ADD_FILM:
       return {
         ...state,
         films: [...state.films, action.payload],
       };
 
-    case DELETE_FILM:
+    case SUCCESS_GET_FILM:
+      return { ...state, film: action.payload };
+
+    case SUCCESS_DELETE_FILM:
       return { ...state, films: state.films.filter((film) => film.id !== action.payload) };
 
-    case EDIT_FILM:
+    case SUCCESS_EDIT_FILM:
       return {
         ...state,
         films: state.films.map((film) => (film.id === action.payload.id ? action.payload : film)),
@@ -34,8 +56,11 @@ export const filmsReducers = (state = initialState, action) => {
     case FILTERED_FILMS:
       return { ...state, filteredFilms: state.films.filter((film) => film.name.toLowerCase().includes(action.payload.toLowerCase())) };
 
-    case GET_FILM:
-      return { ...state, film: action.payload, loading: false };
+    case SHOW_LOADER:
+      return { ...state, loading: true };
+
+    case HIDE_LOADER:
+      return { ...state, loading: false };
 
     default:
       return state;

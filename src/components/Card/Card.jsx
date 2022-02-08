@@ -5,6 +5,7 @@ import "./Card.css";
 import { useDispatch } from "react-redux";
 import { toggleCheckModal, toggleEditModal } from "../../store/actions/mainAction";
 import { resetEvent } from "../../utils/reset";
+import { Link } from "react-router-dom";
 
 export const Card = ({ film }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export const Card = ({ film }) => {
   };
 
   return (
-    <a className="card" href={`/film/${film.id}`}>
+    <Link className="card" to={`/film/${film.id}`}>
       <div className="card-block__img">
         <img src={film.img} alt="" className="card-img" />
       </div>
@@ -30,7 +31,7 @@ export const Card = ({ film }) => {
           <Button margin="5px 0 0" title="Редактировать" color="red" onClick={openEditModalHandler}></Button>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

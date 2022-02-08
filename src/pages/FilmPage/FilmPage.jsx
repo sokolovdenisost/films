@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { E404 } from "../../components/404/404";
 import { Loader } from "../../components/Loader/Loader";
 import { getFilmById } from "../../store/actions/filmsAction";
 import { getYoutubeVideoId } from "../../utils/url";
@@ -20,13 +21,17 @@ export const FilmPage = () => {
     return <Loader />;
   }
 
+  if (!Object.keys(film).length && !loading) {
+    return <E404 />;
+  }
+
   return (
     <div className="filmpage">
       <div className="container">
         <div className="filmpage-left">
           <img src={film.img} alt="" className="filmpage-left__img" />
           <div className="filmpage-left__trailer">
-            <iframe src={getYoutubeVideoId(film.trailer)} allowFullScreen>
+            <iframe title="trailer" src={getYoutubeVideoId(film.trailer)} allowFullScreen>
               Ваш браузер не поддерживает плавающие фреймы!
             </iframe>
           </div>
