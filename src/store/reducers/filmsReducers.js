@@ -12,7 +12,18 @@ import {
 const initialState = {
   films: [],
   filteredFilms: [],
-  film: {},
+  film: {
+    name: "",
+    year: "",
+    country: "",
+    genre: "",
+    director: "",
+    budget: "",
+    img: "",
+    trailer: "",
+    description: "",
+    id: 0,
+  },
   loading: true,
 };
 

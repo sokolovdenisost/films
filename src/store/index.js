@@ -1,5 +1,4 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 
 import rootWatcher from "./sagas";
@@ -15,6 +14,6 @@ const rootReducer = combineReducers({
   errors: errorsReducers,
 });
 
-export default createStore(rootReducer, applyMiddleware(thunk, sagaMiddleware));
+export default createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootWatcher);

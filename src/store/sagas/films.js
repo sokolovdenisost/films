@@ -35,8 +35,7 @@ function* asyncEditFilm(action) {
 }
 
 async function editFilm(id, form) {
-  console.log({ id, form });
-  const response = await fetch(`2${JSON_API}/films/${id}`, {
+  const response = await fetch(`${JSON_API}/films/${id}`, {
     method: "PUT",
     body: JSON.stringify(form),
     headers: {
@@ -88,8 +87,8 @@ async function addFilm(film) {
 // GET FILM
 function* asyncGetFilm(action) {
   try {
-    const { id } = action.payload;
     yield put({ type: SHOW_LOADER });
+    const { id } = action.payload;
     const payload = yield call(getFilm, id);
     yield put({ type: SUCCESS_GET_FILM, payload });
     yield put({ type: HIDE_LOADER });

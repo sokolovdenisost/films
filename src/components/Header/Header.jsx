@@ -20,11 +20,11 @@ export const Header = () => {
     <div className="header">
       <div className="container">
         <div className="header-content">
-          <Link to="/" className="header-content__link">
+          <a href="/" className="header-content__link">
             <h1 className="header-content__title">
               <span>BEST</span>films
             </h1>
-          </Link>
+          </a>
           {pathname === "/" && (
             <div className="header-content__button">
               <Button title="Добавить фильм" color="red" onClick={openModalAddHandler}></Button>

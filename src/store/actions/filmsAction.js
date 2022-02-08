@@ -20,9 +20,9 @@ export const editFilm = (id, form) => {
   return { type: REQUEST_EDIT_FILM, payload: { id, form } };
 };
 
-export const filteredFilmsByName = (filter) => async (dispatch) => {
-  dispatch({
+export const filteredFilmsByName = (filter) => {
+  return {
     type: FILTERED_FILMS,
     payload: filter.toLowerCase(),
-  });
+  };
 };

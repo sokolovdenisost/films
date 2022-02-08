@@ -21,7 +21,7 @@ export const FilmPage = () => {
     return <Loader />;
   }
 
-  if (!Object.keys(film).length) {
+  if (!Object.keys(film).length && !loading) {
     return <E404 />;
   }
 
@@ -31,7 +31,7 @@ export const FilmPage = () => {
         <div className="filmpage-left">
           <img src={film.img} alt="" className="filmpage-left__img" />
           <div className="filmpage-left__trailer">
-            <iframe src={getYoutubeVideoId(film.trailer)} allowFullScreen>
+            <iframe title="trailer" src={getYoutubeVideoId(film.trailer)} allowFullScreen>
               Ваш браузер не поддерживает плавающие фреймы!
             </iframe>
           </div>
