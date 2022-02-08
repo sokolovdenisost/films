@@ -1,13 +1,12 @@
 import {
-  ADD_FILM,
-  DELETE_FILM,
-  EDIT_FILM,
   FILTERED_FILMS,
-  GET_FILM,
   HIDE_LOADER,
   SHOW_LOADER,
   SUCCESS_GET_FILMS,
   SUCCESS_GET_FILM,
+  SUCCESS_ADD_FILM,
+  SUCCESS_DELETE_FILM,
+  SUCCESS_EDIT_FILM,
 } from "../types";
 
 const initialState = {
@@ -25,7 +24,7 @@ export const filmsReducers = (state = initialState, action) => {
         films: action.payload,
       };
 
-    case ADD_FILM:
+    case SUCCESS_ADD_FILM:
       return {
         ...state,
         films: [...state.films, action.payload],
@@ -34,10 +33,10 @@ export const filmsReducers = (state = initialState, action) => {
     case SUCCESS_GET_FILM:
       return { ...state, film: action.payload };
 
-    case DELETE_FILM:
+    case SUCCESS_DELETE_FILM:
       return { ...state, films: state.films.filter((film) => film.id !== action.payload) };
 
-    case EDIT_FILM:
+    case SUCCESS_EDIT_FILM:
       return {
         ...state,
         films: state.films.map((film) => (film.id === action.payload.id ? action.payload : film)),
